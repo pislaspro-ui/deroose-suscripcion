@@ -1,0 +1,1264 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Deroose SuscripciÃ³n</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ---------- Design tokens ---------- */
+  :root{
+    --bg: #F7F8F3;
+    --surface: #FFFFFF;
+    --surface-alt: #EEF1E7;
+    --ink: #16241B;
+    --ink-muted: #5C6B5E;
+    --border: #DDE2D3;
+    --accent: #2F5233;
+    --accent-strong: #1F3D24;
+    --accent-ink: #F7F8F3;
+    --panel: #1F3D24;
+    --panel-ink: #F7F8F3;
+    --panel-ink-muted: rgba(247,248,243,0.72);
+    --gold: #A8813F;
+    --gold-soft: #F1E6CC;
+    --gold-ink: #4A3B1B;
+    --danger: #A8442F;
+
+    --season-spring: #C98CA0;
+    --season-summer: #D9A441;
+    --season-autumn: #B5583A;
+    --season-winter: #6F97A0;
+
+    --font-display: 'Fraunces', Georgia, 'Iowan Old Style', serif;
+    --font-body: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    --radius: 14px;
+    --radius-sm: 8px;
+    --shadow-card: 0 1px 2px rgba(22,36,27,0.06), 0 8px 24px -12px rgba(22,36,27,0.18);
+    --shadow-lift: 0 4px 10px rgba(22,36,27,0.08), 0 20px 40px -16px rgba(22,36,27,0.28);
+    --ease: cubic-bezier(.22,.61,.36,1);
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #121D16;
+      --surface: #1B2A20;
+      --surface-alt: #223226;
+      --ink: #ECF1E8;
+      --ink-muted: #9FB0A0;
+      --border: #32463A;
+      --accent: #9BD25A;
+      --accent-strong: #B9E187;
+      --accent-ink: #14210F;
+      --panel: #0A130D;
+      --panel-ink: #ECF1E8;
+      --panel-ink-muted: rgba(236,241,232,0.68);
+      --gold: #E0BC7C;
+      --gold-soft: #3B331F;
+      --gold-ink: #F3E6C8;
+      --danger: #E08469;
+      --shadow-card: 0 1px 2px rgba(0,0,0,0.35), 0 8px 24px -12px rgba(0,0,0,0.55);
+      --shadow-lift: 0 4px 10px rgba(0,0,0,0.4), 0 20px 40px -16px rgba(0,0,0,0.65);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #121D16;
+    --surface: #1B2A20;
+    --surface-alt: #223226;
+    --ink: #ECF1E8;
+    --ink-muted: #9FB0A0;
+    --border: #32463A;
+    --accent: #9BD25A;
+    --accent-strong: #B9E187;
+    --accent-ink: #14210F;
+    --panel: #0A130D;
+    --panel-ink: #ECF1E8;
+    --panel-ink-muted: rgba(236,241,232,0.68);
+    --gold: #E0BC7C;
+    --gold-soft: #3B331F;
+    --gold-ink: #F3E6C8;
+    --danger: #E08469;
+    --shadow-card: 0 1px 2px rgba(0,0,0,0.35), 0 8px 24px -12px rgba(0,0,0,0.55);
+    --shadow-lift: 0 4px 10px rgba(0,0,0,0.4), 0 20px 40px -16px rgba(0,0,0,0.65);
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,h2,h3,h4{
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.12;
+    text-wrap: balance;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  p{ margin: 0; }
+  a{ color: inherit; }
+  img,svg{ display:block; max-width:100%; }
+
+  ::selection{ background: var(--accent); color: var(--accent-ink); }
+
+  :focus-visible{
+    outline: 2.5px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .wrap{
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  .eyebrow{
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .section{ padding: 88px 0; }
+  @media (max-width: 720px){ .section{ padding: 56px 0; } }
+
+  .btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 13px 24px;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 160ms var(--ease), box-shadow 160ms var(--ease), background 160ms var(--ease);
+    line-height: 1;
+  }
+  .btn:active{ transform: translateY(1px); }
+  .btn-primary{
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+  .btn-primary:hover{ box-shadow: var(--shadow-lift); }
+  .btn-ghost{
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--border);
+  }
+  .btn-ghost:hover{ border-color: var(--accent); color: var(--accent); }
+  .btn-block{ width: 100%; justify-content: center; }
+  .btn[disabled]{ opacity: 0.45; cursor: not-allowed; }
+
+  /* ---------- Header ---------- */
+  header{
+    position: sticky; top: 0; z-index: 40;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 16px 28px;
+    max-width: 1140px; margin: 0 auto;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family: var(--font-display); font-weight:600; font-size: 19px;
+    text-decoration:none; color: var(--ink);
+  }
+  .brand-mark{
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--accent);
+    display:flex; align-items:center; justify-content:center;
+    flex: none;
+  }
+  .brand-mark svg{ width: 16px; height: 16px; }
+  .nav-links{
+    display:flex; align-items:center; gap: 28px;
+    font-size: 14.5px; font-weight: 500; color: var(--ink-muted);
+  }
+  .nav-links a{ text-decoration:none; transition: color 140ms var(--ease); }
+  .nav-links a:hover{ color: var(--accent); }
+  .nav .btn{ padding: 10px 18px; font-size: 14px; }
+  @media (max-width: 680px){ .nav-links{ display:none; } }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position: relative;
+    overflow: hidden;
+    padding: 96px 0 72px;
+  }
+  .hero-motif{
+    position: absolute; inset: 0;
+    pointer-events: none;
+    opacity: 0.9;
+  }
+  .hero-inner{
+    position: relative;
+    max-width: 1140px; margin: 0 auto; padding: 0 28px;
+    display: grid; grid-template-columns: 1fr; gap: 20px;
+  }
+  .hero-tag{
+    display:inline-flex; align-items:center; gap:8px;
+    width: fit-content;
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    padding: 6px 14px 6px 10px;
+    border-radius: 999px;
+    font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em;
+    color: var(--ink-muted);
+    margin-bottom: 4px;
+  }
+  .hero-tag .dot{ width:7px; height:7px; border-radius:50%; background: var(--accent); }
+  .hero h1{
+    font-size: clamp(2.4rem, 5.2vw, 4rem);
+    max-width: 15ch;
+  }
+  .hero .lede{
+    font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+    color: var(--ink-muted);
+    max-width: 56ch;
+    margin-top: 4px;
+  }
+  .hero-cta{
+    display:flex; gap: 14px; flex-wrap: wrap;
+    margin-top: 18px;
+  }
+  .hero-strip{
+    display:flex; gap: 34px; flex-wrap: wrap;
+    margin-top: 56px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+  }
+  .hero-strip .stat b{
+    display:block; font-family: var(--font-display); font-size: 1.5rem; font-weight:600;
+  }
+  .hero-strip .stat span{ font-size: 13px; color: var(--ink-muted); }
+
+  /* ---------- Value pillars ---------- */
+  .pillars{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  @media (max-width: 900px){ .pillars{ grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 520px){ .pillars{ grid-template-columns: 1fr; } }
+  .pillar{
+    background: var(--surface);
+    padding: 26px 22px;
+  }
+  .pillar .icon{
+    width: 38px; height: 38px; border-radius: 10px;
+    background: var(--surface-alt);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom: 16px;
+  }
+  .pillar .icon svg{ width: 19px; height: 19px; stroke: var(--accent); stroke-width: 1.8; }
+  .pillar h3{ font-size: 16.5px; font-weight: 600; margin-bottom: 6px; }
+  .pillar p{ font-size: 13.8px; color: var(--ink-muted); }
+
+  .section-head{ max-width: 640px; margin-bottom: 44px; }
+  .section-head h2{ font-size: clamp(1.8rem, 3vw, 2.3rem); margin-top: 8px; }
+  .section-head .lede{ color: var(--ink-muted); margin-top: 10px; font-size: 1.02rem; }
+
+  /* ---------- Quiz ---------- */
+  .quiz-card{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 40px;
+  }
+  @media (max-width: 860px){ .quiz-card{ grid-template-columns: 1fr; padding: 28px; } }
+
+  .quiz-q{ margin-bottom: 26px; }
+  .quiz-q:last-child{ margin-bottom: 0; }
+  .quiz-q .qlabel{ font-weight: 600; font-size: 15px; margin-bottom: 12px; }
+  .quiz-q .qnum{ color: var(--accent); font-family: var(--font-display); margin-right: 6px; }
+  .option-row{ display:flex; gap: 10px; flex-wrap: wrap; }
+  .option{
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--ink);
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-size: 13.6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 140ms var(--ease);
+  }
+  .option:hover{ border-color: var(--accent); }
+  .option[aria-pressed="true"]{
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  .quiz-result{
+    background: var(--surface-alt);
+    border-radius: var(--radius-sm);
+    padding: 24px;
+    align-self: start;
+    position: sticky;
+    top: 90px;
+  }
+  .quiz-result .eyebrow{ margin-bottom: 10px; display:block; }
+  .quiz-result .rec-name{ font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; margin-bottom: 8px; }
+  .quiz-result p.desc{ font-size: 13.5px; color: var(--ink-muted); margin-bottom: 16px; }
+  .quiz-result .placeholder{ font-size: 13.5px; color: var(--ink-muted); }
+
+  /* ---------- Packages ---------- */
+  .package-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    align-items: stretch;
+  }
+  @media (max-width: 960px){ .package-grid{ grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; } }
+
+  .package{
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 30px 26px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 200ms var(--ease), border-color 200ms var(--ease), transform 200ms var(--ease);
+  }
+  .package:hover{ box-shadow: var(--shadow-lift); transform: translateY(-3px); }
+  .package.is-featured{ border-color: var(--gold); }
+  .package.is-recommended{ border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent), var(--shadow-card); }
+
+  .package-ribbon{
+    position: absolute; top: -12px; left: 26px;
+    font-size: 11.5px; font-weight: 700; letter-spacing: 0.04em;
+    padding: 5px 12px; border-radius: 999px;
+    background: var(--gold-soft); color: var(--gold-ink);
+    display: none;
+  }
+  .package.is-featured .package-ribbon{ display: inline-block; }
+  .package.is-recommended .package-ribbon{ display: inline-block; background: var(--accent); color: var(--accent-ink); }
+
+  .package-head h3{ font-size: 1.5rem; }
+  .package-tier{ font-size: 13px; color: var(--ink-muted); margin-top: 3px; }
+  .package-price{ display:flex; align-items:baseline; gap: 8px; margin-top: 10px; }
+  .package-price .symbols{ font-family: var(--font-display); font-size: 1.7rem; font-weight: 600; color: var(--accent); letter-spacing: 2px; }
+  .package-price .freq{ font-size: 12.5px; color: var(--ink-muted); }
+
+  .chip-row{ display:flex; gap:6px; flex-wrap:wrap; }
+  .chip{
+    font-size: 11.8px; font-weight: 500; color: var(--ink-muted);
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    padding: 4px 9px; border-radius: 999px;
+  }
+  .season-dots{ display:flex; align-items:center; gap:7px; }
+  .season-dots i{ width:9px; height:9px; border-radius:50%; display:inline-block; }
+  .season-dots span{ font-size: 11.8px; color: var(--ink-muted); }
+
+  .package-desc{ font-size: 14px; color: var(--ink-muted); }
+
+  .spec-list{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; border-top: 1px solid var(--border); padding-top: 16px;}
+  .spec-list li{ display:grid; grid-template-columns: 104px 1fr; gap: 10px; font-size: 13.2px; }
+  .spec-list .k{ color: var(--ink-muted); font-weight: 600; font-size: 11.5px; letter-spacing: 0.03em; text-transform: uppercase; padding-top: 2px; }
+  .spec-list .v{ color: var(--ink); }
+  .spec-list .v.muted{ color: var(--ink-muted); }
+
+  .maint-toggle{
+    display:flex; border: 1px solid var(--border); border-radius: 999px; padding: 3px;
+    background: var(--surface-alt);
+  }
+  .maint-toggle button{
+    flex: 1; border: none; background: transparent; cursor: pointer;
+    font-family: var(--font-body); font-size: 12.3px; font-weight: 600;
+    padding: 8px 6px; border-radius: 999px; color: var(--ink-muted);
+    transition: all 140ms var(--ease);
+  }
+  .maint-toggle button[aria-pressed="true"]{ background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+
+  .package-foot{ margin-top: auto; display:flex; flex-direction:column; gap:10px; }
+  .package-select-note{ font-size: 12px; color: var(--ink-muted); text-align:center; min-height: 15px; }
+
+  .btn-catalog{
+    display:flex; align-items:center; justify-content:center; gap: 8px;
+    width: 100%;
+    background: transparent;
+    border: 1px dashed var(--border);
+    color: var(--accent);
+    font-family: var(--font-body); font-weight: 600; font-size: 13px;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: border-color 140ms var(--ease), background 140ms var(--ease);
+  }
+  .btn-catalog:hover{ border-color: var(--accent); background: var(--surface-alt); }
+  .btn-catalog svg{ width: 16px; height: 16px; stroke: var(--accent); stroke-width: 1.6; flex: none; }
+
+  /* ---------- Ornato catalog modal ---------- */
+  .catalog-overlay{
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(12,18,13,0.55);
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 5vh 20px;
+    overflow-y: auto;
+    opacity: 0;
+    transition: opacity 200ms var(--ease);
+  }
+  .catalog-overlay.is-open{ display: flex; opacity: 1; }
+  .catalog-panel{
+    background: var(--surface);
+    border-radius: var(--radius);
+    max-width: 920px; width: 100%;
+    box-shadow: var(--shadow-lift);
+    transform: translateY(10px) scale(0.98);
+    transition: transform 220ms var(--ease);
+  }
+  .catalog-overlay.is-open .catalog-panel{ transform: translateY(0) scale(1); }
+  @media (prefers-reduced-motion: reduce){ .catalog-panel{ transition: none; } .catalog-overlay{ transition: none; } }
+
+  .catalog-head{
+    display:flex; align-items: flex-start; justify-content: space-between; gap: 20px;
+    padding: 28px 32px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .catalog-head h3{ font-size: 1.5rem; margin-top: 4px; }
+  .catalog-head .eyebrow{ display:block; margin-bottom: 2px; }
+  .catalog-close{
+    flex: none;
+    width: 34px; height: 34px; border-radius: 50%;
+    border: 1px solid var(--border); background: var(--surface);
+    color: var(--ink-muted);
+    display:flex; align-items:center; justify-content:center;
+    cursor: pointer;
+  }
+  .catalog-close:hover{ color: var(--ink); border-color: var(--accent); }
+  .catalog-close svg{ width: 16px; height: 16px; }
+
+  .catalog-body{ padding: 24px 32px 32px; }
+  .catalog-group + .catalog-group{ margin-top: 28px; }
+  .catalog-group-title{
+    font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--ink-muted); margin-bottom: 14px;
+  }
+  .plant-grid{
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+  }
+  @media (max-width: 760px){ .plant-grid{ grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 420px){ .plant-grid{ grid-template-columns: 1fr; } }
+
+  .plant-card{ display:flex; flex-direction: column; gap: 8px; }
+  .plant-photo{
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+    overflow: hidden;
+  }
+  .plant-photo svg{ width: 34%; height: 34%; opacity: 0.55; }
+  .plant-photo-caption{
+    position:absolute; left:0; right:0; bottom:0;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.02em;
+    text-align:center; padding: 5px 4px;
+    background: rgba(22,36,27,0.55); color: #F7F8F3;
+  }
+  .plant-name{ font-size: 13.6px; font-weight: 700; color: var(--ink); }
+  .plant-sci{ font-style: italic; font-size: 11.5px; color: var(--ink-muted); margin-top: -6px; }
+  .plant-tag{
+    align-self: flex-start;
+    font-size: 10.5px; font-weight: 600; padding: 3px 9px; border-radius: 999px;
+    background: var(--surface-alt); color: var(--ink-muted);
+  }
+  .plant-note{ font-size: 11.8px; color: var(--ink-muted); }
+
+  /* ---------- How it works ---------- */
+  .flow{
+    display:grid; grid-template-columns: repeat(3,1fr); gap: 0;
+    counter-reset: step;
+  }
+  @media (max-width: 800px){ .flow{ grid-template-columns: 1fr; gap: 22px; } }
+  .flow-step{ padding: 0 26px; position: relative; }
+  .flow-step:first-child{ padding-left: 0; }
+  .flow-step:not(:last-child)::after{
+    content: ""; position: absolute; top: 22px; right: 0; width: 26px; height: 1px;
+    background: var(--border);
+  }
+  @media (max-width: 800px){ .flow-step:not(:last-child)::after{ display:none; } .flow-step{ padding: 0; } }
+  .flow-num{
+    font-family: var(--font-display); font-size: 13px; font-weight:600;
+    color: var(--accent-ink); background: var(--accent);
+    width: 30px; height: 30px; border-radius: 50%;
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom: 16px;
+  }
+  .flow-step h3{ font-size: 16px; margin-bottom: 6px; }
+  .flow-step p{ font-size: 13.6px; color: var(--ink-muted); }
+
+  /* ---------- Contact ---------- */
+  .contact-shell{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+  }
+  @media (max-width: 860px){ .contact-shell{ grid-template-columns: 1fr; } }
+
+  .contact-side{
+    background: var(--panel);
+    color: var(--panel-ink);
+    padding: 40px 36px;
+    display:flex; flex-direction: column;
+    gap: 22px;
+  }
+  .contact-side .eyebrow{ color: var(--panel-ink-muted); }
+  .contact-side h3{ font-size: 1.4rem; color: inherit; }
+  .contact-side p{ font-size: 13.8px; color: var(--panel-ink-muted); }
+  .summary-box{
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: var(--radius-sm);
+    padding: 18px;
+  }
+  .summary-box .eyebrow{ color: var(--panel-ink-muted); }
+  .summary-row{ display:flex; justify-content: space-between; font-size: 13.6px; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.12); color: var(--panel-ink); }
+  .summary-row:last-child{ border-bottom: none; }
+  .summary-row .k{ color: var(--panel-ink-muted); }
+  .summary-row .v{ font-weight: 600; }
+
+  .contact-form{ padding: 40px 36px; }
+  .contact-empty{ padding: 60px 36px; text-align:center; }
+  .contact-empty p{ color: var(--ink-muted); margin: 10px auto 22px; max-width: 40ch; }
+
+  .field{ margin-bottom: 18px; }
+  .field label{ display:block; font-size: 12.8px; font-weight:600; color: var(--ink-muted); margin-bottom: 6px; }
+  .field input, .field select, .field textarea{
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    padding: 11px 13px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--ink);
+    transition: border-color 140ms var(--ease);
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{ border-color: var(--accent); }
+  .field-row{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 480px){ .field-row{ grid-template-columns: 1fr; } }
+
+  .confirm{ display:none; text-align:center; padding: 30px 10px; }
+  .confirm.is-visible{ display:block; }
+  .confirm .icon-ok{
+    width: 56px; height:56px; border-radius:50%; background: var(--surface-alt);
+    display:flex; align-items:center; justify-content:center; margin: 0 auto 18px;
+  }
+  .confirm .icon-ok svg{ width:26px; height:26px; stroke: var(--accent); stroke-width: 2; }
+  .confirm h3{ font-size: 1.3rem; margin-bottom: 8px; }
+  .confirm p{ color: var(--ink-muted); font-size: 14px; max-width: 38ch; margin: 0 auto; }
+
+  /* ---------- Sticky selection bar ---------- */
+  .selection-bar{
+    position: fixed; left: 50%; bottom: 22px; transform: translate(-50%, 140%);
+    background: var(--panel);
+    color: var(--panel-ink);
+    border-radius: 999px;
+    padding: 10px 10px 10px 22px;
+    display:flex; align-items:center; gap: 16px;
+    box-shadow: var(--shadow-lift);
+    z-index: 50;
+    transition: transform 320ms var(--ease);
+    max-width: calc(100vw - 32px);
+  }
+  .selection-bar.is-visible{ transform: translate(-50%, 0); }
+  .selection-bar span{ font-size: 13.6px; font-weight: 500; white-space: nowrap; }
+  .selection-bar b{ font-weight: 700; }
+  .selection-bar .btn{ padding: 9px 18px; font-size: 13.5px; white-space: nowrap; }
+
+  footer{
+    border-top: 1px solid var(--border);
+    padding: 34px 0 100px;
+  }
+  .foot-row{ display:flex; justify-content:space-between; align-items:center; gap: 14px; flex-wrap: wrap; font-size: 13px; color: var(--ink-muted); }
+
+  .visually-hidden{ position:absolute; width:1px;height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a class="brand" href="#top">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" style="stroke:var(--accent-ink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 21C7 19.5 5 15.5 5 11C5 6.5 8.5 3.5 13 4C16.5 4.5 19 8 18.5 11.5C18 15.5 15 19 12 21Z"/>
+          <path d="M12 21C11.5 16 12 10 15 6"/>
+        </svg>
+      </span>
+      Deroose
+    </a>
+    <div class="nav-links">
+      <a href="#paquetes">Paquetes</a>
+      <a href="#como-funciona">CÃ³mo funciona</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+    <a href="#paquetes" class="btn btn-primary">Ver paquetes</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-motif" aria-hidden="true">
+      <svg width="100%" height="100%" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMid slice" style="position:absolute; inset:0; opacity:0.5;">
+        <circle cx="1020" cy="120" r="230" style="fill:var(--surface-alt)"/>
+        <path d="M1180 40 C1120 90 1080 180 1140 260 C1200 190 1220 90 1180 40 Z" style="fill:var(--accent)" opacity="0.10"/>
+        <path d="M960 340 C900 300 830 320 810 390 C880 420 950 400 960 340 Z" style="fill:var(--gold)" opacity="0.16"/>
+        <circle cx="150" cy="480" r="170" style="fill:var(--surface-alt)" opacity="0.7"/>
+      </svg>
+    </div>
+    <div class="hero-inner">
+      <span class="hero-tag"><i class="dot"></i>SuscripciÃ³n para hoteles y despachos de diseÃ±o</span>
+      <h1>Que tu espacio nunca estÃ© fuera de temporada.</h1>
+      <p class="lede">Deroose administra el calendario vegetal de tus propiedades â€” producto, variedad exclusiva y mantenimiento â€” para que cada fecha y cada estaciÃ³n luzcan como deben, sin que tengas que resolverlo tÃº.</p>
+      <div class="hero-cta">
+        <a href="#quiz" class="btn btn-primary">Encontrar mi paquete ideal</a>
+        <a href="#paquetes" class="btn btn-ghost">Ver los 3 paquetes</a>
+      </div>
+      <div class="hero-strip">
+        <div class="stat"><b>3</b><span>modalidades de suscripciÃ³n</span></div>
+        <div class="stat"><b>4â€“10Ã—</b><span>activaciones al aÃ±o, segÃºn el paquete</span></div>
+        <div class="stat"><b>2</b><span>formas de mantenimiento: propia o Deroose Care</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="section" style="padding-top:0;">
+    <div class="wrap">
+      <div class="pillars">
+        <div class="pillar">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg></div>
+          <h3>CuradurÃ­a siempre vigente</h3>
+          <p>Nunca te quedas sin la planta correcta para la fecha o la temporada â€” lo administramos por adelantado.</p>
+        </div>
+        <div class="pillar">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l3 6-9 12L3 9Z"/><path d="M3 9h18M9 3l3 6 3-6M12 9v12"/></svg></div>
+          <h3>Variedad exclusiva</h3>
+          <p>GenÃ©tica uniforme y mayor resistencia vÃ­a Deroose Plants Group â€” difÃ­cil de igualar localmente.</p>
+        </div>
+        <div class="pillar">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <h3>Servicio integral opcional</h3>
+          <p>No solo vendemos la planta: puedes delegar tambiÃ©n el mantenimiento con Deroose Care.</p>
+        </div>
+        <div class="pillar">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6M12 16v6M4.9 4.9l4.2 4.2M14.9 14.9l4.2 4.2M2 12h6M16 12h6M4.9 19.1l4.2-4.2M14.9 9.1l4.2-4.2"/></svg></div>
+          <h3>Escala nacional sin fricciÃ³n</h3>
+          <p>Alianzas con viveros locales cubren CDMX, Jalisco, Monterrey, Riviera Maya y Los Cabos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="section" id="quiz">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Encuentra tu paquete</span>
+        <h2>Dinos quÃ© necesitas â€” te recomendamos la suscripciÃ³n adecuada</h2>
+        <p class="lede">Tres preguntas rÃ¡pidas. Puedes cambiar tu paquete despuÃ©s, esto solo te da un punto de partida.</p>
+      </div>
+
+      <div class="quiz-card">
+        <div>
+          <div class="quiz-q">
+            <div class="qlabel"><span class="qnum">01</span>Â¿QuÃ© tipo de organizaciÃ³n eres?</div>
+            <div class="option-row" data-question="tipo">
+              <button class="option" type="button" data-value="hotel" aria-pressed="false">Cadena hotelera</button>
+              <button class="option" type="button" data-value="arquitectura" aria-pressed="false">Firma de arquitectura o paisajismo</button>
+              <button class="option" type="button" data-value="otro" aria-pressed="false">Otro tipo de espacio</button>
+            </div>
+          </div>
+          <div class="quiz-q">
+            <div class="qlabel"><span class="qnum">02</span>Â¿CuÃ¡ntas propiedades o proyectos activos manejas?</div>
+            <div class="option-row" data-question="propiedades">
+              <button class="option" type="button" data-value="1" aria-pressed="false">1</button>
+              <button class="option" type="button" data-value="2-5" aria-pressed="false">2 a 5</button>
+              <button class="option" type="button" data-value="6+" aria-pressed="false">6 o mÃ¡s</button>
+            </div>
+          </div>
+          <div class="quiz-q">
+            <div class="qlabel"><span class="qnum">03</span>Â¿QuÃ© buscas principalmente?</div>
+            <div class="option-row" data-question="necesidad">
+              <button class="option" type="button" data-value="festivo" aria-pressed="false">Solo fechas festivas clave</button>
+              <button class="option" type="button" data-value="temporada" aria-pressed="false">Renovar con cada temporada</button>
+              <button class="option" type="button" data-value="todo" aria-pressed="false">Que Deroose administre todo el aÃ±o</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-result" id="quizResult">
+          <span class="eyebrow">Te recomendamos</span>
+          <p class="placeholder" id="quizPlaceholder">Responde las tres preguntas y aquÃ­ aparecerÃ¡ el paquete que mÃ¡s se ajusta a tu operaciÃ³n.</p>
+          <div id="quizAnswer" style="display:none;">
+            <div class="rec-name" id="quizRecName">â€”</div>
+            <p class="desc" id="quizRecDesc">â€”</p>
+            <a href="#paquetes" class="btn btn-primary btn-block" id="quizRecCta">Ver este paquete</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACKAGES -->
+  <section class="section" id="paquetes">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Modelo de negocio</span>
+        <h2>Tres formas de suscribirte</h2>
+        <p class="lede">Cada paquete incluye producto curado, garantÃ­a de reposiciÃ³n y la opciÃ³n de sumar mantenimiento gestionado por Deroose.</p>
+      </div>
+
+      <div class="package-grid" id="packageGrid">
+
+        <!-- FESTIVO -->
+        <article class="package" data-package="festivo">
+          <span class="package-ribbon">Recomendado para ti</span>
+          <div class="package-head">
+            <h3>Festivo</h3>
+            <div class="package-tier">Esencial â€” presencia en fechas clave</div>
+            <div class="package-price"><span class="symbols">$</span><span class="freq">por activaciÃ³n</span></div>
+          </div>
+          <div class="chip-row">
+            <span class="chip">Navidad</span>
+            <span class="chip">San ValentÃ­n</span>
+            <span class="chip">DÃ­a de las Madres</span>
+            <span class="chip">DÃ­a de Muertos</span>
+          </div>
+          <p class="package-desc">SelecciÃ³n curada de plantas de ornato floreadas para 4â€“6 fechas comerciales clave al aÃ±o.</p>
+
+          <ul class="spec-list">
+            <li><span class="k">Frecuencia</span><span class="v">4â€“6 entregas / aÃ±o</span></li>
+            <li><span class="k">Mantenimiento</span><span class="v" data-maint-text>Add-on â€” Deroose Care</span></li>
+            <li><span class="k">GarantÃ­a</span><span class="v muted">ReposiciÃ³n si llega daÃ±ada + recordatorio 2 semanas antes</span></li>
+            <li><span class="k">Ideal para</span><span class="v muted">Espacios que solo necesitan presencia en fechas clave</span></li>
+          </ul>
+
+          <div>
+            <div class="maint-toggle" role="group" aria-label="Modalidad de mantenimiento â€” Festivo">
+              <button type="button" data-maint="auto" aria-pressed="true">AutogestiÃ³n</button>
+              <button type="button" data-maint="care" aria-pressed="false">Deroose Care</button>
+            </div>
+          </div>
+
+          <button class="btn-catalog" type="button" data-open-catalog="festivo">
+            <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.4"/><path d="M12 9.6C12 9.6 9 8 9 5.5C9 4 10.2 3 11.5 3C12.6 3 12 6 12 9.6ZM12 9.6C12 9.6 15 8 15 5.5C15 4 13.8 3 12.5 3C11.4 3 12 6 12 9.6ZM12 14.4C12 14.4 9 16 9 18.5C9 20 10.2 21 11.5 21C12.6 21 12 18 12 14.4ZM12 14.4C12 14.4 15 16 15 18.5C15 20 13.8 21 12.5 21C11.4 21 12 18 12 14.4ZM9.6 12C9.6 12 8 9 5.5 9C4 9 3 10.2 3 11.5C3 12.6 6 12 9.6 12ZM9.6 12C9.6 12 8 15 5.5 15C4 15 3 13.8 3 12.5C3 11.4 6 12 9.6 12ZM14.4 12C14.4 12 16 9 18.5 9C20 9 21 10.2 21 11.5C21 12.6 18 12 14.4 12ZM14.4 12C14.4 12 16 15 18.5 15C20 15 21 13.8 21 12.5C21 11.4 18 12 14.4 12Z"/></svg>
+            Ver ornatos incluidos
+          </button>
+
+          <div class="package-foot">
+            <button class="btn btn-ghost btn-block" data-select-package>Elegir Festivo</button>
+            <div class="package-select-note"></div>
+          </div>
+        </article>
+
+        <!-- TEMPORADA -->
+        <article class="package" data-package="temporada">
+          <span class="package-ribbon">Recomendado para ti</span>
+          <div class="package-head">
+            <h3>Temporada</h3>
+            <div class="package-tier">Balanceado â€” renovaciÃ³n estacional</div>
+            <div class="package-price"><span class="symbols">$$</span><span class="freq">por activaciÃ³n</span></div>
+          </div>
+          <div class="season-dots">
+            <i style="background:var(--season-spring)"></i>
+            <i style="background:var(--season-summer)"></i>
+            <i style="background:var(--season-autumn)"></i>
+            <i style="background:var(--season-winter)"></i>
+            <span>Primavera Â· Verano Â· OtoÃ±o Â· Invierno</span>
+          </div>
+          <p class="package-desc">RenovaciÃ³n de paleta vegetal y floral segÃºn la estaciÃ³n del aÃ±o, cuatro veces al aÃ±o.</p>
+
+          <ul class="spec-list">
+            <li><span class="k">Frecuencia</span><span class="v">4 entregas / aÃ±o</span></li>
+            <li><span class="k">Mantenimiento</span><span class="v" data-maint-text>Add-on â€” Deroose Care</span></li>
+            <li><span class="k">GarantÃ­a</span><span class="v muted">ReposiciÃ³n si llega daÃ±ada + recomendaciÃ³n de diseÃ±o estacional</span></li>
+            <li><span class="k">Ideal para</span><span class="v muted">Espacios que renuevan su imagen todo el aÃ±o</span></li>
+          </ul>
+
+          <div>
+            <div class="maint-toggle" role="group" aria-label="Modalidad de mantenimiento â€” Temporada">
+              <button type="button" data-maint="auto" aria-pressed="true">AutogestiÃ³n</button>
+              <button type="button" data-maint="care" aria-pressed="false">Deroose Care</button>
+            </div>
+          </div>
+
+          <button class="btn-catalog" type="button" data-open-catalog="temporada">
+            <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.4"/><path d="M12 9.6C12 9.6 9 8 9 5.5C9 4 10.2 3 11.5 3C12.6 3 12 6 12 9.6ZM12 9.6C12 9.6 15 8 15 5.5C15 4 13.8 3 12.5 3C11.4 3 12 6 12 9.6ZM12 14.4C12 14.4 9 16 9 18.5C9 20 10.2 21 11.5 21C12.6 21 12 18 12 14.4ZM12 14.4C12 14.4 15 16 15 18.5C15 20 13.8 21 12.5 21C11.4 21 12 18 12 14.4ZM9.6 12C9.6 12 8 9 5.5 9C4 9 3 10.2 3 11.5C3 12.6 6 12 9.6 12ZM9.6 12C9.6 12 8 15 5.5 15C4 15 3 13.8 3 12.5C3 11.4 6 12 9.6 12ZM14.4 12C14.4 12 16 9 18.5 9C20 9 21 10.2 21 11.5C21 12.6 18 12 14.4 12ZM14.4 12C14.4 12 16 15 18.5 15C20 15 21 13.8 21 12.5C21 11.4 18 12 14.4 12Z"/></svg>
+            Ver ornatos incluidos
+          </button>
+
+          <div class="package-foot">
+            <button class="btn btn-ghost btn-block" data-select-package>Elegir Temporada</button>
+            <div class="package-select-note"></div>
+          </div>
+        </article>
+
+        <!-- COMPLETO -->
+        <article class="package is-featured" data-package="completo">
+          <span class="package-ribbon">â˜… Recomendado</span>
+          <div class="package-head">
+            <h3>Completo</h3>
+            <div class="package-tier">Integral â€” calendario administrado por completo</div>
+            <div class="package-price"><span class="symbols">$$$</span><span class="freq">por activaciÃ³n</span></div>
+          </div>
+          <div class="chip-row">
+            <span class="chip">Festivo</span>
+            <span class="chip">+</span>
+            <span class="chip">Temporada</span>
+          </div>
+          <p class="package-desc">Festivo y Temporada combinados â€” Deroose administra tu calendario vegetal completo.</p>
+
+          <ul class="spec-list">
+            <li><span class="k">Frecuencia</span><span class="v">8â€“10 entregas / aÃ±o</span></li>
+            <li><span class="k">Mantenimiento</span><span class="v" data-maint-text>Incluido â€” Deroose Care</span></li>
+            <li><span class="k">GarantÃ­a</span><span class="v muted">ReposiciÃ³n prioritaria + gestor de cuenta dedicado</span></li>
+            <li><span class="k">Ideal para</span><span class="v muted">Cadenas multi-propiedad y clientes premium</span></li>
+          </ul>
+
+          <div>
+            <div class="maint-toggle" role="group" aria-label="Modalidad de mantenimiento â€” Completo">
+              <button type="button" data-maint="auto" aria-pressed="false">AutogestiÃ³n</button>
+              <button type="button" data-maint="care" aria-pressed="true">Deroose Care</button>
+            </div>
+          </div>
+
+          <button class="btn-catalog" type="button" data-open-catalog="completo">
+            <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.4"/><path d="M12 9.6C12 9.6 9 8 9 5.5C9 4 10.2 3 11.5 3C12.6 3 12 6 12 9.6ZM12 9.6C12 9.6 15 8 15 5.5C15 4 13.8 3 12.5 3C11.4 3 12 6 12 9.6ZM12 14.4C12 14.4 9 16 9 18.5C9 20 10.2 21 11.5 21C12.6 21 12 18 12 14.4ZM12 14.4C12 14.4 15 16 15 18.5C15 20 13.8 21 12.5 21C11.4 21 12 18 12 14.4ZM9.6 12C9.6 12 8 9 5.5 9C4 9 3 10.2 3 11.5C3 12.6 6 12 9.6 12ZM9.6 12C9.6 12 8 15 5.5 15C4 15 3 13.8 3 12.5C3 11.4 6 12 9.6 12ZM14.4 12C14.4 12 16 9 18.5 9C20 9 21 10.2 21 11.5C21 12.6 18 12 14.4 12ZM14.4 12C14.4 12 16 15 18.5 15C20 15 21 13.8 21 12.5C21 11.4 18 12 14.4 12Z"/></svg>
+            Ver ornatos incluidos
+          </button>
+
+          <div class="package-foot">
+            <button class="btn btn-primary btn-block" data-select-package>Elegir Completo</button>
+            <div class="package-select-note"></div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" id="como-funciona">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">CÃ³mo funciona</span>
+        <h2>De la elecciÃ³n a la primera entrega</h2>
+      </div>
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-num">1</div>
+          <h3>Eliges tu paquete</h3>
+          <p>Festivo, Temporada o Completo, con o sin Deroose Care.</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">2</div>
+          <h3>Habla con un gerente de ventas</h3>
+          <p>Confirmamos ubicaciones, volumen y condiciones comerciales contigo.</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">3</div>
+          <h3>Deroose administra el calendario</h3>
+          <p>Producto curado y, si lo elegiste, mantenimiento vÃ­a viveros aliados en tu plaza.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contacto">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Ãšltimo paso</span>
+        <h2>Habla con un gerente de ventas</h2>
+        <p class="lede">Este es un prototipo â€” al enviar el formulario no se procesa ningÃºn pago ni cargo real; solo simula el contacto con Deroose.</p>
+      </div>
+
+      <div class="contact-shell">
+        <div class="contact-side">
+          <div>
+            <span class="eyebrow">Tu selecciÃ³n</span>
+            <h3 style="margin-top:8px;">Resumen de suscripciÃ³n</h3>
+          </div>
+          <div class="summary-box">
+            <div class="summary-row"><span class="k">Paquete</span><span class="v" id="sumPackage">Sin elegir</span></div>
+            <div class="summary-row"><span class="k">Mantenimiento</span><span class="v" id="sumMaint">â€”</span></div>
+            <div class="summary-row"><span class="k">Frecuencia</span><span class="v" id="sumFreq">â€”</span></div>
+            <div class="summary-row"><span class="k">Nivel de precio</span><span class="v" id="sumPrice">â€”</span></div>
+          </div>
+          <p>Un gerente de ventas de Deroose confirmarÃ¡ disponibilidad, tarifas por ubicaciÃ³n y condiciones de importaciÃ³n contigo directamente.</p>
+        </div>
+
+        <div style="position:relative;">
+          <div class="contact-empty" id="contactEmpty">
+            <span class="eyebrow">Falta un paso</span>
+            <h3 style="margin-top:10px;">Elige un paquete primero</h3>
+            <p>Selecciona Festivo, Temporada o Completo arriba para desbloquear el formulario de contacto.</p>
+            <a href="#paquetes" class="btn btn-primary">Ver paquetes</a>
+          </div>
+
+          <form class="contact-form" id="contactForm" style="display:none;">
+            <div class="field-row">
+              <div class="field">
+                <label for="fName">Nombre</label>
+                <input id="fName" name="fName" type="text" required autocomplete="name" />
+              </div>
+              <div class="field">
+                <label for="fCompany">Empresa</label>
+                <input id="fCompany" name="fCompany" type="text" required autocomplete="organization" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="fType">Tipo de cliente</label>
+              <select id="fType" name="fType" required>
+                <option value="" disabled selected>Selecciona una opciÃ³n</option>
+                <option value="hotel">Cadena hotelera</option>
+                <option value="arquitectura">Firma de arquitectura o paisajismo</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="fLocations">Ciudad(es) o nÃºmero de propiedades</label>
+              <input id="fLocations" name="fLocations" type="text" placeholder="Ej. CDMX y Los Cabos, 4 propiedades" required />
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="fEmail">Correo</label>
+                <input id="fEmail" name="fEmail" type="email" required autocomplete="email" />
+              </div>
+              <div class="field">
+                <label for="fPhone">TelÃ©fono</label>
+                <input id="fPhone" name="fPhone" type="tel" required autocomplete="tel" />
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Contactar a un gerente de ventas</button>
+          </form>
+
+          <div class="confirm" id="confirmState">
+            <div class="icon-ok"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <h3>Solicitud enviada</h3>
+            <p>Gracias â€” un gerente de ventas de Deroose te contactarÃ¡ en las prÃ³ximas 24 horas para confirmar tu suscripciÃ³n <strong id="confirmPackage">Completo</strong>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <span>Deroose MÃ©xico â€” prototipo de suscripciÃ³n. Datos y precios ilustrativos.</span>
+    <span>Producto e importaciÃ³n en alianza con Deroose Plants Group y AI Mayan Enterprises LLC.</span>
+  </div>
+</footer>
+
+<div class="catalog-overlay" id="catalogOverlay" role="dialog" aria-modal="true" aria-labelledby="catalogTitle">
+  <div class="catalog-panel">
+    <div class="catalog-head">
+      <div>
+        <span class="eyebrow">Ornatos incluidos</span>
+        <h3 id="catalogTitle">Paquete</h3>
+      </div>
+      <button class="catalog-close" type="button" id="catalogClose" aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="catalog-body" id="catalogBody"></div>
+  </div>
+</div>
+
+<div class="selection-bar" id="selectionBar">
+  <span>Tu selecciÃ³n: <b id="barPackage">â€”</b> Â· <b id="barMaint">â€”</b></span>
+  <a href="#contacto" class="btn btn-primary" id="barCta">Continuar a contacto</a>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var PACKAGES = {
+    festivo: {
+      name: "Festivo",
+      tier: "Esencial",
+      freq: "4â€“6 entregas / aÃ±o",
+      price: "$",
+      desc: "SelecciÃ³n curada para 4â€“6 fechas comerciales clave (Navidad, San ValentÃ­n, DÃ­a de las Madres, DÃ­a de Muertos).",
+      maint: { auto: "No incluido â€” el cliente gestiona el cuidado", care: "Add-on â€” Deroose Care" }
+    },
+    temporada: {
+      name: "Temporada",
+      tier: "Balanceado",
+      freq: "4 entregas / aÃ±o",
+      price: "$$",
+      desc: "RenovaciÃ³n de paleta vegetal y floral segÃºn primavera, verano, otoÃ±o e invierno.",
+      maint: { auto: "No incluido â€” el cliente gestiona el cuidado", care: "Add-on â€” Deroose Care" }
+    },
+    completo: {
+      name: "Completo",
+      tier: "Integral",
+      freq: "8â€“10 entregas / aÃ±o",
+      price: "$$$",
+      desc: "Festivo + Temporada combinados â€” calendario administrado por completo.",
+      maint: { auto: "No incluido â€” el cliente gestiona el cuidado", care: "Incluido â€” Deroose Care" }
+    }
+  };
+
+  /* ---------------- CatÃ¡logo de ornatos ---------------- */
+  var FLOWER_ICON = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="12" r="2.4"/><path d="M12 9.6C12 9.6 9 8 9 5.5C9 4 10.2 3 11.5 3C12.6 3 12 6 12 9.6ZM12 9.6C12 9.6 15 8 15 5.5C15 4 13.8 3 12.5 3C11.4 3 12 6 12 9.6ZM12 14.4C12 14.4 9 16 9 18.5C9 20 10.2 21 11.5 21C12.6 21 12 18 12 14.4ZM12 14.4C12 14.4 15 16 15 18.5C15 20 13.8 21 12.5 21C11.4 21 12 18 12 14.4ZM9.6 12C9.6 12 8 9 5.5 9C4 9 3 10.2 3 11.5C3 12.6 6 12 9.6 12ZM9.6 12C9.6 12 8 15 5.5 15C4 15 3 13.8 3 12.5C3 11.4 6 12 9.6 12ZM14.4 12C14.4 12 16 9 18.5 9C20 9 21 10.2 21 11.5C21 12.6 18 12 14.4 12ZM14.4 12C14.4 12 16 15 18.5 15C20 15 21 13.8 21 12.5C21 11.4 18 12 14.4 12Z"/></svg>';
+
+  var FESTIVO_PLANTS = [
+    { name: "Nochebuena", sci: "Euphorbia pulcherrima", tag: "Navidad", tint: "var(--gold-soft)", note: "Follaje rojo intenso, la flor navideÃ±a por excelencia para lobbies y recepciones." },
+    { name: "Amarilis", sci: "Hippeastrum spp.", tag: "Navidad", tint: "var(--gold-soft)", note: "Flor de gran tamaÃ±o en rojos y blancos, ideal para centros de mesa de invierno." },
+    { name: "Rosa", sci: "Rosa spp.", tag: "San ValentÃ­n", tint: "var(--gold-soft)", note: "ClÃ¡sico atemporal para fechas romÃ¡nticas y accesos principales." },
+    { name: "OrquÃ­dea Phalaenopsis", sci: "Phalaenopsis spp.", tag: "San ValentÃ­n", tint: "var(--gold-soft)", note: "Elegante y de larga duraciÃ³n; favorita en habitaciones y Ã¡reas de bienestar." },
+    { name: "Hortensia", sci: "Hydrangea macrophylla", tag: "DÃ­a de las Madres", tint: "var(--gold-soft)", note: "Follaje abundante en azules y rosas, ideal para arreglos generosos." },
+    { name: "Gerbera", sci: "Gerbera jamesonii", tag: "DÃ­a de las Madres", tint: "var(--gold-soft)", note: "Colores vibrantes que aportan calidez a lobbies y restaurantes." },
+    { name: "CempasÃºchil", sci: "Tagetes erecta", tag: "DÃ­a de Muertos", tint: "var(--gold-soft)", note: "Flor emblemÃ¡tica de la temporada de DÃ­a de Muertos en MÃ©xico." },
+    { name: "Crisantemo", sci: "Chrysanthemum spp.", tag: "DÃ­a de Muertos", tint: "var(--gold-soft)", note: "Variedad y color para ofrendas y ambientaciÃ³n de temporada." }
+  ];
+
+  var TEMPORADA_PLANTS = [
+    { name: "Buganvilia", sci: "Bougainvillea spp.", tag: "Primavera", tint: "color-mix(in srgb, var(--season-spring) 22%, var(--surface-alt))", note: "Color intenso y resistencia; ideal para exteriores y terrazas." },
+    { name: "Azalea", sci: "Rhododendron simsii", tag: "Primavera", tint: "color-mix(in srgb, var(--season-spring) 22%, var(--surface-alt))", note: "FloraciÃ³n abundante que anuncia el cambio de temporada." },
+    { name: "Ave del ParaÃ­so", sci: "Strelitzia reginae", tag: "Verano", tint: "color-mix(in srgb, var(--season-summer) 22%, var(--surface-alt))", note: "Silueta arquitectÃ³nica que distingue lobbies de diseÃ±o contemporÃ¡neo." },
+    { name: "Hibisco", sci: "Hibiscus rosa-sinensis", tag: "Verano", tint: "color-mix(in srgb, var(--season-summer) 22%, var(--surface-alt))", note: "Flores grandes y luminosas para terrazas y albercas." },
+    { name: "Dalia", sci: "Dahlia spp.", tag: "OtoÃ±o", tint: "color-mix(in srgb, var(--season-autumn) 22%, var(--surface-alt))", note: "Flor nacional de MÃ©xico; formas y colores para renovar la temporada." },
+    { name: "Girasol", sci: "Helianthus annuus", tag: "OtoÃ±o", tint: "color-mix(in srgb, var(--season-autumn) 22%, var(--surface-alt))", note: "Presencia cÃ¡lida y luminosa para el cierre del aÃ±o." },
+    { name: "Ciclamen", sci: "Cyclamen persicum", tag: "Invierno", tint: "color-mix(in srgb, var(--season-winter) 22%, var(--surface-alt))", note: "FloraciÃ³n delicada que resiste bien los interiores frescos." },
+    { name: "Camelia", sci: "Camellia japonica", tag: "Invierno", tint: "color-mix(in srgb, var(--season-winter) 22%, var(--surface-alt))", note: "Follaje brillante y flores estructuradas para invierno." }
+  ];
+
+  var CATALOGS = {
+    festivo: { title: "Festivo", groups: [{ label: "Fechas festivas", plants: FESTIVO_PLANTS }] },
+    temporada: { title: "Temporada", groups: [{ label: "Cambios de estaciÃ³n", plants: TEMPORADA_PLANTS }] },
+    completo: { title: "Completo", groups: [
+      { label: "Fechas festivas", plants: FESTIVO_PLANTS },
+      { label: "Cambios de estaciÃ³n", plants: TEMPORADA_PLANTS }
+    ] }
+  };
+
+  function plantCardHTML(p){
+    return '' +
+      '<div class="plant-card">' +
+        '<div class="plant-photo" style="background:' + p.tint + '">' +
+          FLOWER_ICON +
+          '<span class="plant-photo-caption">Foto prÃ³ximamente</span>' +
+        '</div>' +
+        '<span class="plant-tag">' + p.tag + '</span>' +
+        '<div class="plant-name">' + p.name + '</div>' +
+        '<div class="plant-sci">' + p.sci + '</div>' +
+        '<div class="plant-note">' + p.note + '</div>' +
+      '</div>';
+  }
+
+  function renderCatalog(key){
+    var data = CATALOGS[key];
+    document.getElementById("catalogTitle").textContent = "Ornatos del paquete " + data.title;
+    var body = document.getElementById("catalogBody");
+    body.innerHTML = data.groups.map(function(g){
+      return '<div class="catalog-group">' +
+        '<div class="catalog-group-title">' + g.label + '</div>' +
+        '<div class="plant-grid">' + g.plants.map(plantCardHTML).join("") + '</div>' +
+      '</div>';
+    }).join("");
+  }
+
+  var catalogTrigger = null;
+  var catalogOverlay = document.getElementById("catalogOverlay");
+
+  function openCatalog(key, trigger){
+    renderCatalog(key);
+    catalogTrigger = trigger || null;
+    catalogOverlay.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+    document.getElementById("catalogClose").focus();
+  }
+  function closeCatalog(){
+    catalogOverlay.classList.remove("is-open");
+    document.body.style.overflow = "";
+    if(catalogTrigger) catalogTrigger.focus();
+  }
+
+  document.querySelectorAll("[data-open-catalog]").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      openCatalog(btn.getAttribute("data-open-catalog"), btn);
+    });
+  });
+  document.getElementById("catalogClose").addEventListener("click", closeCatalog);
+  catalogOverlay.addEventListener("click", function(e){
+    if(e.target === catalogOverlay) closeCatalog();
+  });
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Escape" && catalogOverlay.classList.contains("is-open")) closeCatalog();
+  });
+
+  var state = {
+    quiz: { tipo: null, propiedades: null, necesidad: null },
+    recommended: null,
+    selectedPackage: null,
+    maint: { festivo: "auto", temporada: "auto", completo: "care" }
+  };
+
+  /* ---------------- Quiz ---------------- */
+  var optionRows = document.querySelectorAll(".option-row");
+  optionRows.forEach(function(row){
+    var q = row.getAttribute("data-question");
+    row.querySelectorAll(".option").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        row.querySelectorAll(".option").forEach(function(b){ b.setAttribute("aria-pressed", "false"); });
+        btn.setAttribute("aria-pressed", "true");
+        state.quiz[q] = btn.getAttribute("data-value");
+        evaluateQuiz();
+      });
+    });
+  });
+
+  function evaluateQuiz(){
+    var q = state.quiz;
+    if(!q.tipo || !q.propiedades || !q.necesidad) return;
+
+    var rec = "completo";
+    if(q.necesidad === "festivo") rec = "festivo";
+    else if(q.necesidad === "temporada") rec = "temporada";
+    else if(q.necesidad === "todo") rec = "completo";
+
+    if(q.tipo === "hotel" && q.propiedades === "6+") rec = "completo";
+
+    state.recommended = rec;
+    renderQuizResult();
+    renderRecommendedRibbons();
+  }
+
+  function renderQuizResult(){
+    var p = PACKAGES[state.recommended];
+    document.getElementById("quizPlaceholder").style.display = "none";
+    var answer = document.getElementById("quizAnswer");
+    answer.style.display = "block";
+    document.getElementById("quizRecName").textContent = p.name;
+    document.getElementById("quizRecDesc").textContent = p.desc;
+    document.getElementById("quizRecCta").href = "#pkg-" + state.recommended;
+  }
+
+  function renderRecommendedRibbons(){
+    document.querySelectorAll(".package").forEach(function(card){
+      var key = card.getAttribute("data-package");
+      card.classList.toggle("is-recommended", key === state.recommended);
+    });
+  }
+
+  /* ---------------- Packages: maintenance toggle ---------------- */
+  document.querySelectorAll(".package").forEach(function(card){
+    var key = card.getAttribute("data-package");
+    card.id = "pkg-" + key;
+    var toggle = card.querySelector(".maint-toggle");
+    var maintText = card.querySelector("[data-maint-text]");
+
+    toggle.querySelectorAll("button").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        toggle.querySelectorAll("button").forEach(function(b){ b.setAttribute("aria-pressed", "false"); });
+        btn.setAttribute("aria-pressed", "true");
+        var mode = btn.getAttribute("data-maint");
+        state.maint[key] = mode;
+        maintText.textContent = PACKAGES[key].maint[mode];
+        if(state.selectedPackage === key) updateSelectionUI();
+      });
+    });
+
+    card.querySelector("[data-select-package]").addEventListener("click", function(){
+      state.selectedPackage = key;
+      document.querySelectorAll(".package-select-note").forEach(function(n){ n.textContent = ""; });
+      card.querySelector(".package-select-note").textContent = "Paquete seleccionado";
+      updateSelectionUI();
+    });
+  });
+
+  function updateSelectionUI(){
+    if(!state.selectedPackage) return;
+    var key = state.selectedPackage;
+    var p = PACKAGES[key];
+    var mode = state.maint[key];
+
+    document.getElementById("barPackage").textContent = p.name;
+    document.getElementById("barMaint").textContent = mode === "care" ? "Deroose Care" : "AutogestiÃ³n";
+    document.getElementById("selectionBar").classList.add("is-visible");
+
+    document.getElementById("sumPackage").textContent = p.name + " (" + p.tier + ")";
+    document.getElementById("sumMaint").textContent = mode === "care" ? "Deroose Care" : "AutogestiÃ³n";
+    document.getElementById("sumFreq").textContent = p.freq;
+    document.getElementById("sumPrice").textContent = p.price;
+
+    document.getElementById("contactEmpty").style.display = "none";
+    document.getElementById("contactForm").style.display = "block";
+    document.getElementById("confirmState").classList.remove("is-visible");
+    state.formSubmitted = false;
+  }
+
+  /* ---------------- Contact form ---------------- */
+  var form = document.getElementById("contactForm");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    if(!state.selectedPackage) return;
+    var p = PACKAGES[state.selectedPackage];
+    document.getElementById("confirmPackage").textContent = p.name;
+    form.style.display = "none";
+    document.getElementById("confirmState").classList.add("is-visible");
+    state.formSubmitted = true;
+  });
+
+  document.getElementById("barCta").addEventListener("click", function(){
+    // relies on default anchor scroll; nothing else required
+  });
+})();
+</script>
+
+</body>
+</html>
